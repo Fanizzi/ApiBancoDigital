@@ -10,7 +10,6 @@ CREATE TABLE Correntista(
   nome VARCHAR(255) NOT NULL,
   cpf CHAR(11) NOT NULL,
   data_nasc DATE NOT NULL,
-  senha VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 -- -----------------------------------------------------
@@ -18,8 +17,10 @@ CREATE TABLE Correntista(
 -- -----------------------------------------------------
 CREATE TABLE Conta(
   id INT NOT NULL AUTO_INCREMENT,
-  numero INT NOT NULL,
   tipo VARCHAR(255) NOT NULL,
+  saldo DOUBLE NOT NULL,
+  limite DOUBLE NOT NULL,
+  numero INT NOT NULL,
   senha VARCHAR(255) NOT NULL,
   id_correntista INT NOT NULL,
   PRIMARY KEY (id),
