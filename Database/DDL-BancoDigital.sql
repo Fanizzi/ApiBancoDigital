@@ -10,6 +10,7 @@ CREATE TABLE Correntista(
   nome VARCHAR(255) NOT NULL,
   cpf CHAR(11) NOT NULL,
   data_nasc DATE NOT NULL,
+  senha VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 -- -----------------------------------------------------
@@ -25,6 +26,7 @@ CREATE TABLE Conta(
   id_correntista INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (id_correntista) REFERENCES Correntista (id)
+
 );
 
 -- -----------------------------------------------------

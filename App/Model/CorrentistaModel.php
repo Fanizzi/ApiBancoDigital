@@ -9,16 +9,21 @@ class CorrentistaModel extends Model
 {
     public $id, $nome, $cpf, $data_nasc, $senha;
 
-    public function getAll()
+    public function save()
     {
-        try {
-            $dao = new CorrentistaDAO();
+        if($this->id == null)
+            (new CorrentistaDAO())->insert($this);
+        else
+            (new CorrentistaDAO())->update($this);        
+    }
 
-            $this->rows = $dao->selectCorrentistas();
-        }
-        catch (Exception $e)
-        {
-            throw $e;
-        }
+    public function getAllRows()
+    {
+        $this->rows = (new CorrentistaDAO())->select();
+    }
+
+    public function delete()
+    {
+        (new CorrentistaDAO())->delete($this->id);
     }
 }
