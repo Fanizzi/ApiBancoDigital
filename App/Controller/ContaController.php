@@ -33,13 +33,39 @@ class ContaController extends Controller
 
     public static function enviar() : void
     {
+        try
+        {
+            $model = new ContaModel();
 
+            $q = json_encode(file_get_contents('php://input'));
+
+            $model->getAllRows($q);
+
+            parent::getExceptionAsJSON($model->rows);
+        }
+        catch(Exception $e)
+        {
+            parent::getExceptionAsJSON($e);
+        }
     }
 
     public static function receber() : void
     {
+        try
+        {
+            $model = new ContaModel();
 
+            $model->getAllRows();
+    
+            parent::getResponseAsJSON($model->rows);
+        }
+        catch(Exception $e)
+        {
+            parent::getExceptionAsJSON($e);
+        }
+        
     }
+
 
     public static function extrato() : void
     {
