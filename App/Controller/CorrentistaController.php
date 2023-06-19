@@ -7,40 +7,47 @@ use Exception;
 
 class CorrentistaController extends Controller
 {
-    public static function save() : void
+    public static function save()
     {
         try
         {
-            $json_obj = json_decode(file_get_contents('php://input'));
+ 
+            $data = json_decode(file_get_contents('php://input'));
 
             $model = new CorrentistaModel();
-            $model->id = $json_obj->Id;
-            $model->nome = $json_obj->Nome;
-            $model->data_nasc = $json_obj->Data_Nasc;
 
-            $model->save();
-        }
-        catch (Exception $e)
-        {
+            foreach (get_object_vars($data) as $key => $value) 
+            {
+                $prop_letra_minuscula = strtolower($key);
+
+                $model->$prop_letra_minuscula = $value;
+            }
+
+            parent::getResponseAsJSON($model->save()); 
+
+        } catch(Exception $e) {
+            
+            parent::LogError($e);
             parent::getExceptionAsJSON($e);
-        }
+        }   
     }
 
-    public static function entrar() : void
+    public static function entrar()
     {
-        
-    }
+        try
+        {
 
-    public static function getCorrentista() : void
-    {
-        try{
+            $data = json_decode(file_get_contents('php://input'));
+
             $model = new CorrentistaModel();
-            $model->getAllRows();
-            parent::getResponseAsJSON($model->rows);
-        }
-        catch (Exception $e)
-        {
+
+            parent::getResponseAsJSON($model->getByCpfAndSenha($data->Cpf, $data->Senha)); 
+
+        } catch(Exception $e) {
+            
+            parent::LogError($e);
             parent::getExceptionAsJSON($e);
-        }
+        }  
+
     }
 }
