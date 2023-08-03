@@ -11,52 +11,68 @@ class ChavePixController extends Controller
     {
         try
         {
-            $json_obj = json_decode(file_get_contents('php://input'));
+            $data = json_decode(file_get_contents('php://input'));
 
             $model = new ChavePixModel();
-            $model->id = $json_obj->Id;
-            $model->chave = $json_obj->Chave;
-            $model->tipo = $json_obj->Tipo;
-            $model->id_conta = $json_obj->Id_conta;
 
-            $model->save();
-        }
-        catch (Exception $e)
-        {
+            // Copiando os valores de $data para $model dinamicamente
+
+            foreach (get_object_vars($data) as $key => $value)
+            {
+                $prop_letra_minuscula = strtolower($key);
+
+                $model->$prop_letra_minuscula = $value;
+            }
+
+            parent::getResponseAsJSON($model->save());
+        } catch(Exception $e) {
+
+            parent::LogError($e);
             parent::getExceptionAsJSON($e);
         }
     }
 
-    public static function enviar() : void
+    public static function listar() : void
     {
         try 
         {
-            $model = new ChavePixModel();
+            $data = json_decode(file_get_contents('php://input'));
 
-            $q = json_encode(file_get_contents('php://input'));
+            $model = new ChavePixModel;
 
-            $model->getAllRows($q);
+            // Salvando o novo correntista e definindo a saída.
 
-            parent::getExceptionAsJSON($model->rows);
+            parent::getResponseAsJSON($model->getAllRows($data->id_correntista));
         }
         catch (Exception $e)
         {
+            parent::LogError($e);
             parent::getExceptionAsJSON($e);
         }
     }
 
-    public static function receber() : void
+    public static function remover() : void
     {
         try
         {
+            $data = json_decode(file_get_contents('php://input'));
+
             $model = new ChavePixModel();
 
-            $model->getAllRows();
+            // Copiando osvalores de $data para $model dinamicamente
 
-            parent::getResponseAsJSON($model->rows);
+            foreach (get_object_vars($data) as $key =>$value)
+            {
+                $prop_letra_minuscula = strtolower($key);
+
+                $model->$prop_letra_minuscula = $value;
+            }
+
+            parent::getResponseAsJSON($model->save());
         }
         catch(Exception $e)
         {
+            parent::LogError($e);
             parent::getExceptionAsJSON($e);
         }
     }
