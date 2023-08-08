@@ -3,27 +3,23 @@
 namespace App\Model;
 
 use App\DAO\ChavePixDAO;
-use Exception;
 
 class ChavePixModel extends Model
 {
     public $id, $tipo, $chave, $id_conta;
 
-    public function save()
+    public function save() : ?ChavePixModel
     {
-        if($this->id == null)
-            (new ChavePixDAO())->insert($this);
-        else
-            (new ChavePixDAO())->update($this);
+        return (new ChavePixDAO())->save($this);
     }
 
-    public function getAllRows()
+    public function getAllRows(int $id_correntista) : array
     {
-        $this->rows = (new ChavePixDAO())->select();
+        return (new ChavePixDAO())->SELECT($id_correntista);
     }
 
-    public function delete()
+    public function remove() : bool
     {
-        (new ChavePixDAO())->delete($this->id);
+        return (new ChavePixDAO())->delete($this);
     }
 }
