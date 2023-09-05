@@ -8,7 +8,22 @@ use Exception;
 
 class ContaController extends Controller
 {
-    public static function save() : void
+    public static function abrir()
+    {
+
+    }
+
+    public static function fechar()
+    {
+
+    }
+
+    public static function extrato()
+    {
+        
+    }
+
+    /*public static function save() : void
     {
         try
         {
@@ -84,5 +99,5 @@ class ContaController extends Controller
         {
            parent::getExceptionAsJSON($e); 
         }
-    }
+    }*/
 }

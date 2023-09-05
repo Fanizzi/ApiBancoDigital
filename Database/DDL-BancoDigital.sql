@@ -8,7 +8,7 @@ USE db_bancodigital;
 CREATE TABLE Correntista(
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
-  cpf CHAR(11) NOT NULL,
+  cpf CHAR(14) NOT NULL,
   data_nasc DATE NOT NULL,
   senha VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
