@@ -18,7 +18,7 @@ CREATE TABLE Correntista(
 -- -----------------------------------------------------
 CREATE TABLE Conta(
   id INT NOT NULL AUTO_INCREMENT,
-  tipo VARCHAR(255) NOT NULL,
+  tipo ENUM('C', 'P') NOT NULL,
   saldo DOUBLE NOT NULL,
   limite DOUBLE NOT NULL,
   numero INT NOT NULL,
