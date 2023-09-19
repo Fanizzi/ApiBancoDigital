@@ -9,7 +9,7 @@ CREATE TABLE Correntista(
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(255) NOT NULL,
   cpf CHAR(14) NOT NULL,
-  data_nasc DATE NOT NULL,
+  data_nasc string NOT NULL,
   senha VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
@@ -21,8 +21,6 @@ CREATE TABLE Conta(
   tipo ENUM('C', 'P') NOT NULL,
   saldo DOUBLE NOT NULL,
   limite DOUBLE NOT NULL,
-  numero INT NOT NULL,
-  senha VARCHAR(255) NOT NULL,
   id_correntista INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (id_correntista) REFERENCES Correntista (id)

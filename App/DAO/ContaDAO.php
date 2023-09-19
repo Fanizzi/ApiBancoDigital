@@ -23,31 +23,27 @@ class ContaDAO extends DAO
 
     public function insert(ContaModel $m) : bool
     {
-        $sql = "INSERT INTO Conta (tipo, saldo, limite, numero, senha, id_correntista)
+        $sql = "INSERT INTO Conta (tipo, saldo, limite, id_correntista)
                 VALUES (?, ?, ?, ?, ?, ?)";
         
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(1, $m->tipo);
         $stmt->bindValue(2, $m->saldo);
         $stmt->bindValue(3, $m->limite);
-        $stmt->bindValue(4, $m->numero);
-        $stmt->bindValue(5, $m->senha);
-        $stmt->bindValue(6, $m->id_correntista);
+        $stmt->bindValue(4, $m->id_correntista);
 
         return $stmt->execute();
     }
 
     public function update(ContaModel $m) : bool
     {
-        $sql = "UPDATE Conta SET tipo=?, saldo=?, limite=?, numero=?, senha=?, id_correntista WHERE id=?";
+        $sql = "UPDATE Conta SET tipo=?, saldo=?, limite=?, id_correntista WHERE id=?";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(1, $m->tipo);
         $stmt->bindValue(2, $m->saldo);
         $stmt->bindValue(3, $m->limite);
-        $stmt->bindValue(4, $m->numero);
-        $stmt->bindValue(5, $m->senha);
-        $stmt->bindValue(6, $m->id_correntista);
+        $stmt->bindValue(4, $m->id_correntista);
 
         return $stmt->execute();
     }

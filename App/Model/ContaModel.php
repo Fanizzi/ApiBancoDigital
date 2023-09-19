@@ -7,7 +7,7 @@ use Exception;
 
 class ContaModel extends Model
 {
-    public $id, $tipo, $saldo, $limite, $numero, $senha, $id_correntista;
+    public $id, $tipo, $saldo, $limite, $id_correntista;
     
     public function save()
     {
