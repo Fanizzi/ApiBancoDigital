@@ -17,7 +17,7 @@ class CorrentistaModel extends Model
 
         $model_preenchido = $dao_correntista->save($this);
 
-        return (new CorrentistaDAO())->save($this);
+        //return (new CorrentistaDAO())->save($this);
         
         if($model_preenchido->id != null)
         {

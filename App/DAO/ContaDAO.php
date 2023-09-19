@@ -24,7 +24,7 @@ class ContaDAO extends DAO
     public function insert(ContaModel $m) : bool
     {
         $sql = "INSERT INTO Conta (tipo, saldo, limite, id_correntista)
-                VALUES (?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?)";
         
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(1, $m->tipo);
